@@ -1,0 +1,280 @@
+
+
+//1.
+var http = require('http');
+
+// Create an instance of the http server to handle HTTP requests
+var app = http.createServer(function(req, res){
+    // Set a response type of plain text for the response
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+
+    // Send back a response and end the connection
+    res.end(`Success,I'm listening from port 3000\n`);
+});
+
+// Start the server on port 3000
+app.listen(3000, '127.0.0.1');
+console.log('Node server running on port 3000');
+
+
+//2.
+var fs = require('fs');
+fs.readFile('test.txt','utf8',function(err,data){
+  if (err)
+    return console.log(err);
+  else {
+    return console.log(data);
+  }
+});
+
+
+
+//3.
+const directory = "./";
+const path = require("path");
+const fs = require("fs");
+
+fs.readdir(directory, (err, files) => {
+	files.forEach((file) => {
+		if (fs.lstatSync(path.resolve(directory, file)).isDirectory()) {
+			console.log("Directory: " + file);
+		} else {
+			console.log("File: " + file);
+		}
+	});
+});
+
+
+
+
+//4.
+
+var fs = require('fs');
+
+
+fs.writeFile('newfile.txt',`hey,hoo!Let's Go`,function (err) {
+  if (err) throw err;
+  console.log('Hey');
+});
+
+
+//5.
+var fs=require('fs');
+var filename='text.txt'
+var wordtofind=process.argv[2].toLowerCase();
+
+fs.readFile(filename,'utf8',function(err,contentFile){
+    if(err)throw err;
+    var aWordsText=contentFile.toLowerCase().split(' ');
+    var aFIlteredWords=aWordsText.filter(function(word){
+        return word.includes(wordtofind);
+    })
+    console.log('The word"'+wordtofind+'"appears '+aFIlteredWords.length+" times in the text.");
+});
+
+
+
+
+
+
+//6.
+///a.
+/calculator.js
+function calAdd(a, b) {
+	return a + b;
+}
+
+function calMul(a, b) {
+	return a * b;
+}
+let c = 3;
+let d = 7;
+let addition = calAdd(c, d);
+let multiplication = calMul(c, d);
+module.exports = { c, d, addition, multiplication };
+
+/app.js
+const o = require("./calculator.js");
+console.log(`The sum of ${o.c} & ${o.d} is ${o.addition}`);
+console.log(`The multiplication of ${o.c} & ${o.d} is ${o.multiplication}`);
+
+
+///b.
+//app.js
+const o = require("./sum.js");
+const p = require("./sub.js");
+const q = require("./mul.js");
+const r = require("./div.js");
+
+console.log(`The sum of ${o.c} & ${o.d} is ${o.addition}`);
+console.log(`The difference of ${p.c} & ${p.d} is ${p.difference}`);
+console.log(`The multiplication of ${q.c} & ${q.d} is ${q.multiplication}`);
+console.log(`The division of ${r.c} & ${r.d} is ${r.division}`);
+
+//sum.js
+function sum(a,b){
+  return a+b;
+}
+
+let c=4;
+let d=2;
+
+let addition = sum(c, d);
+module.exports = { c, d, addition};
+
+//sub.js
+function sub(a,b){
+  return a-b;
+}
+
+let c=4;
+let d=2;
+
+
+let difference = sub(c, d);
+module.exports = { c, d, difference };
+
+//mul.js
+function mul(a,b){
+  return a*b;
+}
+
+let c=4;
+let d=2;
+
+
+let multiplication = mul(c, d);
+module.exports = { c, d,multiplication };
+
+//div.js
+function div(a,b){
+  return a/b;
+}
+
+let c=4;
+let d=2;
+
+
+let division = div(c, d);
+module.exports = { c, d, division };
+
+
+
+//c.
+//calculator.js
+function calAdd(a, b) {
+	return a + b;
+}
+
+function calMul(a, b) {
+	return a * b;
+}
+let c = 3;
+let d = 7;
+let addition = calAdd(c, d);
+let multiplication = calMul(c, d);
+module.exports = { c, d, addition, multiplication };
+
+//app.js
+const o = require("./calculator.js");
+const moment = require("moment");
+console.log(moment().format("dddd,MMMM Do YYYY, h:mm:ss a"));
+console.log(`The sum of ${o.c} & ${o.d} is ${o.addition}`);
+console.log(`The multiplication of ${o.c} & ${o.d} is ${o.multiplication}`);
+
+
+//7.
+var strftime = require("strftime");
+console.log(strftime("%I"));
+
+
+//8.
+const fs = require("fs");
+const prompt = require("prompt-sync")({ sigint: true });
+const num = prompt("Enter a number : ");
+let sum = 0;
+for (i = 1; i <= num; i++) {
+	sum += i;
+}
+//console.log(`The sum of all integers is ${sum}`);
+fs.writeFile("./docs/demo.txt", `The sum of all integers is ${sum}`, () => {
+	console.log("File has been updated with the required sum");
+});
+
+
+
+
+//9.
+var fs = require('fs');
+var text = fs.readFileSync("./text.txt", 'utf8');
+var textByLine = text.split('\n')
+console.log(textByLine);
+
+
+
+
+
+//10.
+const fs = require("fs");
+fs.writeFile("./myblog.txt", `"Hey ho! let's go"`, () => {
+	console.log("The file was saved!");
+});
+
+
+
+//extra part
+const fs = require("fs");	
+
+fs.renameSync("./myblog.txt", "./blogs.txt");
+console.log("File Renamed.");
+
+
+
+
+//more extra part
+const fs = require("fs");
+fs.writeFile("./myblog.txt", `It's a long way to the top....`, () => {
+	console.log("The file was saved!");
+});
+fs.readFile("./myblog.txt", { encoding: "utf8" }, (err, data) => {
+	if (err) throw err;
+	else {
+		console.log(data);
+	}
+});
+
+
+
+
+//11.
+var fs = require('fs');
+
+fs.readFile('my-file.txt', 'utf8', function(err, data) {
+    if (err) throw err;
+    console.log(data);
+});
+
+
+
+
+//12.
+const moment = require("moment"); //using moment
+const strftime = require("strftime"); //using strftime
+console.log(moment().format());
+console.log(strftime("%c"));
+
+
+
+
+
+//13.
+console.log(process.argv);
+var myname = process.argv.slice(2);
+console.log(`${myname} hello, ${myname}`);
+
+
+//13.(another method)
+const prompt = require('prompt-sync')();
+const name = prompt('What is your name?');
+console.log(`${name} hello, ${name}!`);
+
